@@ -16,7 +16,7 @@ pub fn invert(options: &Options) -> Result<String, KakError> {
         // Split by multiline so subtraction is defined (see below)
         // Group by row, so for a given document row, subtraction can iterate over the Vec
         get_selections_desc(Some("<a-s>"))?
-            .group_by(|a, b| a.left.row == b.left.row)
+            .chunk_by(|a, b| a.left.row == b.left.row)
             .map(|sds| (sds[0].left.row, sds.to_vec()))
             .collect()
     };
